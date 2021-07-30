@@ -13,7 +13,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with Gemavatar.  If not, see <http://www.gnu.org/licenses/>.
 
-class CreatePictures < ActiveRecord::Migration
+class CreatePictures < Rails.version < '5.1' ? ActiveRecord::Migration : ActiveRecord::Migration[4.2]
   def self.up
     create_table :pictures do |t|
       t.column :user_id, :integer, :null => false
