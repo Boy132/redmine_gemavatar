@@ -1,9 +1,7 @@
-# Gemavatar (Redmine 4.1+)
-
-## About
-``Gemavatar`` is a [Redmine](https://www.redmine.org/) plugin for replacing the gravatars (they must 
-be enabled) with the jpeg pictures stored in the ldap auth_source that 
-Redmine is configured to work with.
+# Gemavatar 2 (Redmine 4.1+)
+``Gemavatar 2`` is the (inofficial) successor of the original Gemavatar plugin for [Redmine](https://www.redmine.org/).
+It's replacing the Gravatars of users by JPEG pictures that are stored in the ldap _auth_source_ of Redmine.
+Make sure to enable [Gravatars](https://www.redmine.org/projects/redmine/wiki/RedmineSettings#Use-Gravatar-user-icons)!
 
 Installation
 ------------
@@ -22,7 +20,7 @@ Please be sure to rename the folder to `redmine_gemavatar` if necessary.
 Configuration
 -------------
 
-First, make sure that the Gravater feature of Redmine is enabled.
+First, make sure that the [Gravater feature](https://www.redmine.org/projects/redmine/wiki/RedmineSettings#Use-Gravatar-user-icons) of Redmine is enabled.
 
 Then go to Administration > Plugins and click ``Configure`` on the Gemavatar
 plugin.
