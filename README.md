@@ -1,8 +1,4 @@
-# Gemavatar (Redmine 3+)
-
-## Disclaimer
-This project is a fork of the excellent https://bitbucket.org/celebdor/gemavatar
-Since there have been no updates since a while, I decided to update it to make it Redmine 3+ compatible.
+# Gemavatar (Redmine 4.1+)
 
 ## About
 ``Gemavatar`` is a ``Redmine`` plugin for replacing the gravatars (they must 
@@ -12,21 +8,23 @@ be enabled) with the jpeg pictures stored in the ldap auth_source that
 Installation
 ------------
 
-Git clone the repo in the plugins folder
-`git clone git@gitlab.com:aguarino/gemavatar.git`
+1. Git clone the repo in the plugins folder: `git clone git@gitlab.com:aguarino/gemavatar.git`
+Please be sure that the folder is named `redmine_gemavatar`.
 
-Please be sure that the folder is named `redmine_gemavatar`
+2. Install required gems:
+`bundle install --without development test --no-deployment`
 
-Do the migration on the database (will create the table with the pictures):
+3. Do the database migration on the database:
+`bundle exec rake redmine:plugins NAME=redmine_gemavatar RAILS_ENV=production`
 
-`ruby bin/rake redmine:plugins RAILS_ENV="production"`
-
-Restart the web server service.
+4. Restart the web server service.
 
 Configuration
 -------------
 
-Go to Administration -> Plugins and click ``Configure`` on the Gemavatar
+First, make sure that the Gravater feature of Redmine is enabled.
+
+Then go to Administration > Plugins and click ``Configure`` on the Gemavatar
 plugin.
 
 There you must set:
