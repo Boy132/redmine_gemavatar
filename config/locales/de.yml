@@ -1,0 +1,5 @@
+# German strings go here for Rails i18n
+de:
+  refresh_days: Ablauf der Cache-Zeit für Avatar-Bilder
+  allow_reload: Benutzern erlauben, ihren Avatar neu zu laden? 
+  LDAP_photoprop: LDAP-Eigenschaft, die JPEG enthält
