@@ -1,23 +1,23 @@
 # Gemavatar (Redmine 4.1+)
 
 ## About
-``Gemavatar`` is a ``Redmine`` plugin for replacing the gravatars (they must 
+``Gemavatar`` is a [Redmine](https://www.redmine.org/) plugin for replacing the gravatars (they must 
 be enabled) with the jpeg pictures stored in the ldap auth_source that 
-``Redmine`` is configured to work with.
+Redmine is configured to work with.
 
 Installation
 ------------
 
-1. Git clone the repo in the plugins folder: `git clone git@gitlab.com:aguarino/gemavatar.git`
-Please be sure that the folder is named `redmine_gemavatar`.
+1. Download the [latest release](https://github.com/Boy132/redmine_gemavatar/releases/latest) (or git clone the repo `git clone git@github.com:Boy132/redmine_gemavatar.git`) and unzip it in the plugins folder.
+Please be sure to rename the folder to `redmine_gemavatar` if necessary.
 
 2. Install required gems:
 `bundle install --without development test --no-deployment`
 
-3. Do the database migration on the database:
+3. Do the database migration:
 `bundle exec rake redmine:plugins NAME=redmine_gemavatar RAILS_ENV=production`
 
-4. Restart the web server service.
+4. Restart the web server service. (e.g. `touch tmp/restart.txt`)
 
 Configuration
 -------------
