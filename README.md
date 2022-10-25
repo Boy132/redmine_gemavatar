@@ -3,6 +3,8 @@
 It's replacing the Gravatars of users by JPEG pictures that are stored in the ldap _auth_source_ of Redmine.
 Make sure to enable [Gravatars](https://www.redmine.org/projects/redmine/wiki/RedmineSettings#Use-Gravatar-user-icons)!
 
+**This plugin is no longer maintained!**
+
 Installation
 ------------
 
