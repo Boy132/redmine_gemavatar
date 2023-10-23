@@ -53,7 +53,11 @@ class Picture < ActiveRecord::Base
         end
 
         if picture_data.nil?
-            location = spock_location()
+			if user_login == "bot"
+				location = bot_location()
+			else
+				location = generic_avatar_location()
+			end
         else
             location = location_from_login(user_login)
             File.open(location, 'wb') { |f| f.write(picture_data)}
@@ -78,10 +82,16 @@ class Picture < ActiveRecord::Base
         File.join(plugin_dir, 'assets', 'images', login+'.jpg')
     end
 
-    def self.spock_location()
+    def self.generic_avatar_location()
         filename = File.dirname(__FILE__)
         plugin_dir = File.expand_path(File.dirname(File.dirname(filename)))
         File.join(plugin_dir, 'assets', 'images', 'avatar.png')
+    end
+	
+	def self.bot_avatar_location()
+        filename = File.dirname(__FILE__)
+        plugin_dir = File.expand_path(File.dirname(File.dirname(filename)))
+        File.join(plugin_dir, 'assets', 'images', 'bot.png')
     end
 
     def old?

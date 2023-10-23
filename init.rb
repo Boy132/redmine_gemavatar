@@ -15,14 +15,14 @@
 
 require 'redmine'
 require 'gravatar'
-require 'application_helper_gemavatar_patch'
-require 'gemavatar_hooks'
+require File.dirname(__FILE__) + '/lib/redmine_gemavatar/application_helper_gemavatar_patch.rb'
+require File.dirname(__FILE__) + '/lib/redmine_gemavatar/gemavatar_hooks.rb'
 
 Redmine::Plugin.register :redmine_gemavatar do
   name 'Redmine Gemavatar'
   author 'Andrea Guarino + Antoni Segura Puimedon + Boy132'
   description 'Fetches avatars from LDAP'
-  version '2.0'
+  version '2.1'
   url 'https://github.com/Boy132/redmine_gemavatar'
   author_url 'https://github.com/Boy132/redmine_gemavatar/graphs/contributors'
   requires_redmine :version_or_higher => '4.1.1'
