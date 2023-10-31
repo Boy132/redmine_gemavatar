@@ -76,11 +76,13 @@ class Picture < ActiveRecord::Base
 	    
         current_picture = get_by_user_id(user_id)
         if current_picture.nil?
-            Picture.create(:location => location, :user_id => user_id, :created => DateTime.now.to_date)
+            current_picture = Picture.create(:location => location, :user_id => user_id, :created => DateTime.now.to_date)
         else
             current_picture.location = location
             current_picture.created = DateTime.now.to_date
         end
+
+	current_picture
     end
 
     def self.location_from_login(login)
