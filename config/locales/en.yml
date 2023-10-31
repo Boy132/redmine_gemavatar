@@ -3,3 +3,4 @@ en:
   refresh_days: Avatar images cache time expiration
   allow_reload: Allow users to reload their avatar?
   LDAP_photoprop: LDAP property containing jpeg
+  label_picture: Gemavatar picture
