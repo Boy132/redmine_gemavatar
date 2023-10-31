@@ -19,7 +19,7 @@ class Picture < ActiveRecord::Base
     unloadable
 
     def self.get_by_user_id(uid)
-        Picture.where(:user_id => uid).first
+        Picture.where(:user_id => uid).last
     end
 
     def self.initialize_ldap_con(record)
