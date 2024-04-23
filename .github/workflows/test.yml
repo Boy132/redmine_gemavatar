@@ -1,0 +1,82 @@
+name: Tests
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: ${{ matrix.redmine }} ruby-${{ matrix.ruby }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        ruby: ['3.0', '3.1', '3.2']
+        redmine: ['5.0-stable', '5.1-stable']
+        exclude:
+          - ruby: '3.2'
+            redmine: 5.0-stable
+      fail-fast: false
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        ports:
+          - 3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    steps:
+      - name: Checkout Redmine
+        uses: actions/checkout@v4
+        with:
+          repository: redmine/redmine
+          ref: ${{ matrix.redmine }}
+          path: redmine
+
+      - name: Update package archives
+        run: sudo apt-get update --yes --quiet
+
+      - name: Install package dependencies
+        run: >
+          sudo apt-get install --yes --quiet
+          build-essential
+          cmake
+          libicu-dev
+          libpq-dev
+          libmysqlclient-dev
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      - name: Install Ruby dependencies
+        working-directory: redmine
+        run: |
+          bundle config set --local without 'development'
+          bundle install --jobs=4 --retry=3
+
+      - name: Run Redmine rake tasks
+        env:
+          RAILS_ENV: test
+          MYSQL_PORT: ${{ job.services.mysql.ports[3306] }}
+        working-directory: redmine
+        run: |
+          bundle exec rake generate_secret_token
+          bundle exec rake db:create db:migrate redmine:plugins:migrate
+
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          MYSQL_PORT: ${{ job.services.mysql.ports[3306] }}
+        working-directory: redmine
+        run: bundle exec rake redmine:plugins:test NAME=redmine_gemavatar RUBYOPT="-W0"
+
+      - name: Run uninstall test
+        env:
+          RAILS_ENV: test
+          MYSQL_PORT: ${{ job.services.mysql.ports[3306] }}
+        working-directory: redmine
+        run: bundle exec rake redmine:plugins:migrate NAME=redmine_gemavatar VERSION=0
