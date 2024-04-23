@@ -58,6 +58,7 @@ jobs:
           cp database.yml.example database.yml
           cp configuration.yml.example configuration.yml
           cp additional_environment.rb.example additional_environment.rb
+          sed -i 's/localhost/127.0.0.1/g' database.yml
 
       - name: Install Ruby dependencies
         working-directory: redmine
