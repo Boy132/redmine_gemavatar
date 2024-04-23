@@ -24,6 +24,7 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: redmine_test
         ports:
+          # will assign a random free host port
           - 3306/tcp
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
@@ -63,7 +64,7 @@ jobs:
           cp database.yml.example database.yml
           cp configuration.yml.example configuration.yml
           cp additional_environment.rb.example additional_environment.rb
-          sed -i 's/localhost/127.0.0.1/g' database.yml
+          sed -i 's/3306/${{ job.services.mysql.ports[3306] }}/g' database.yml
 
       - name: Install Ruby dependencies
         working-directory: redmine
