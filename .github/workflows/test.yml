@@ -52,6 +52,13 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
+      - name: Prepare Redmine source
+        working-directory: redmine/config
+        run: |
+          cp database.yml.example database.yml
+          cp configuration.yml.example configuration.yml
+          cp additional_environment.rb.example additional_environment.rb
+
       - name: Install Ruby dependencies
         working-directory: redmine
         run: |
