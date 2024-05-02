@@ -97,6 +97,13 @@ jobs:
           bundle exec rake generate_secret_token
           bundle exec rake db:create db:migrate redmine:plugins:migrate
 
+      - name: Enable Gravatar via database
+        env:
+          RAILS_ENV: test
+          MYSQL_PORT: ${{ job.services.mysql.ports[3306] }}
+        working-directory: redmine
+        run: mysql -u root redminedb -e "UPDATE settings SET value = 1 WHERE name = 'gravatar_enabled';";
+
       - name: Run tests
         env:
           RAILS_ENV: test
