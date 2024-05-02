@@ -46,6 +46,12 @@ jobs:
           ref: ${{ matrix.redmine }}
           path: redmine
 
+      - name: Checkout gemavatar
+        uses: actions/checkout@v4
+        with:
+          repository: Boy132/redmine_gemavatar
+          path: redmine/plugins/redmine_gemavatar
+
       - name: Update package archives
         run: sudo apt-get update --yes --quiet
 
