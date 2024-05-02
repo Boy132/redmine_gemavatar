@@ -14,7 +14,7 @@
 #    along with Gemavatar.  If not, see <http://www.gnu.org/licenses/>.
 
 require 'redmine'
-require 'gravatar'
+
 require File.dirname(__FILE__) + '/lib/redmine_gemavatar/application_helper_gemavatar_patch.rb'
 require File.dirname(__FILE__) + '/lib/redmine_gemavatar/gemavatar_hooks.rb'
 
