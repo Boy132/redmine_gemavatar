@@ -102,7 +102,7 @@ jobs:
           RAILS_ENV: test
           MYSQL_PORT: ${{ job.services.mysql.ports[3306] }}
         working-directory: redmine
-        run: mysql -h 127.0.0.1 -u root redmine_test -e "UPDATE settings SET value = 1 WHERE name = 'gravatar_enabled';";
+        run: mysql -h 127.0.0.1 -P ${{ job.services.mysql.ports[3306] }} -u root redmine_test -e "UPDATE settings SET value = 1 WHERE name = 'gravatar_enabled';";
 
       - name: Run tests
         env:
